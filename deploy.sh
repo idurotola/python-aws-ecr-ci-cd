@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 # more bash-friendly output for jq
 JQ="jq --raw-output --exit-status"
 
@@ -17,7 +16,7 @@ deploy_cluster() {
   make_task_def
   register_definition
   if [[ $(aws ecs update-service --cluster sample-webapp-cluster --service sample-webapp-service --task-definition $revision | \
-                 $JQ '.service.taskDefinition') != $revision ]]; then
+        $JQ '.service.taskDefinition') != $revision ]]; then
       echo "Error updating service."
       return 1
   fi
