@@ -8,4 +8,7 @@ jobs:
     steps:
       - deploy:
           name: Deploy Master to AWS
-          command: bash .circleci/deploy.sh
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              ./deploy.sh
+            fi
