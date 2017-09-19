@@ -3,12 +3,13 @@ jobs:
   build:
     docker:
       - image: tiangolo/uwsgi-nginx-flask:python2.7
-    working_directory: /tmp/lab
     steps:
-      - run: echo "About to start deploy"
-      - deploy:
+      - run: echo "About to start deploy on ${CIRCLE_BRANCH}"
+      - run:
           name: Deploy Master Branch to AWS
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               ./deploy/deploy.sh
+            else
+              echo "Skipping deploy, branch is not master"
             fi
