@@ -10,5 +10,5 @@ jobs:
           name: Deploy Master to AWS
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              bash echo ".circleci/deploy.sh"
+              echo ".circleci/deploy.sh"
             fi
