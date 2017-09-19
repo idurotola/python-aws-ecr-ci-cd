@@ -60,6 +60,10 @@ register_definition() {
 
 }
 
-configure_aws_cli
-push_ecr_image
-deploy_cluster
+if [ "${CIRCLE_BRANCH}" == "master" ]; then
+  configure_aws_cli
+  push_ecr_image
+  deploy_cluster
+else
+  echo "Not on master branch - Not Deploying"
+fi
