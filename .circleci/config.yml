@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: tiangolo/uwsgi-nginx-flask:python2.7
     steps:
+      - checkout
       - run: echo "About to start deploy on ${CIRCLE_BRANCH}"
       - deploy:
           name: Deploy Master Branch to AWS
