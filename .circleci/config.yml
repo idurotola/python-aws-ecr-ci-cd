@@ -6,9 +6,4 @@ jobs:
         environment:
           FLASK_CONFIG: testing
     steps:
-      - deploy:
-          name: Deploy Master to AWS
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              ./deploy.sh
-            fi
+      - run: bash ./deploy.sh
