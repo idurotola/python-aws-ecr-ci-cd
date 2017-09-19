@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: fstab/aws-cli
+      - image: docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/autodeploy:$CIRCLE_SHA1 .
     steps:
       - checkout
       - run: echo "About to start deploy on ${CIRCLE_BRANCH}"
