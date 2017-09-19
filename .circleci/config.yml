@@ -5,7 +5,7 @@ jobs:
       - image: tiangolo/uwsgi-nginx-flask:python2.7
     steps:
       - run: echo "About to start deploy on ${CIRCLE_BRANCH}"
-      - run:
+      - deploy:
           name: Deploy Master Branch to AWS
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
