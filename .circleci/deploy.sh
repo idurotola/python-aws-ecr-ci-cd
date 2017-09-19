@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 CLUSTER='autodeploy'
 
 # more bash-friendly output for jq
