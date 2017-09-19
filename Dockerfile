@@ -1,7 +1,11 @@
 # Building on top of Ubuntu 14.04. The best distro around.
-FROM ubuntu:14.04
+FROM tiangolo/uwsgi-nginx-flask:python2.7
 
-COPY ./lab /opt/
-EXPOSE 8080
+# copy over our requirements.txt file
+COPY requirements.txt /tmp/
 
-ENTRYPOINT ["/opt/lab"]
+# upgrade pip and install our requirements
+RUN pip install -U pip
+RUN pip install -r /tmp/requirements.txt
+
+COPY ./app /app

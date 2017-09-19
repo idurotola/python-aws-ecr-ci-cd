@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers
+      - image: tiangolo/uwsgi-nginx-flask:python2.7
         environment:
           FLASK_CONFIG: testing
     steps:
@@ -10,5 +10,5 @@ jobs:
           name: Deploy Master to AWS
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              bash .circleci/deploy.sh
+              bash deploy.sh
             fi
