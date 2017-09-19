@@ -1,4 +1,5 @@
 #!/bin/bash
 
 # Install aws on this machine
-pip install awscli --upgrade --user
+apt-get update && apt-get install -y awscli
+apt-get install jq
