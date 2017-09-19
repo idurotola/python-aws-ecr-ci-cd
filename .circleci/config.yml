@@ -3,8 +3,6 @@ jobs:
   build:
     docker:
       - image: tiangolo/uwsgi-nginx-flask:python2.7
-        environment:
-          FLASK_CONFIG: testing
     working_directory: /tmp/lab
     steps:
       - run: echo "About to start deploy"
@@ -13,5 +11,6 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               pwd
+              ls
               ./deploy.sh
             fi
