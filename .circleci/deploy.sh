@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-AWS_ACCOUNT_ID='827425948711'
-CIRCLE_SHA1='latest'
 CLUSTER='autodeploy'
 
 # more bash-friendly output for jq
