@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: tiangolo/uwsgi-nginx-flask:python2.7
+      - image: circleci/python:3.6.2-stretch-browsers
     steps:
       - checkout
       - run: echo "About to start deploy on ${CIRCLE_BRANCH}"
