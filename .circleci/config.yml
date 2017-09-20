@@ -39,6 +39,7 @@ jobs:
           paths:
             - /caches/app.tar
       - deploy:
+          working_directory: ../
           name: Push application Docker image
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
