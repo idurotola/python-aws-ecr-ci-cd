@@ -49,14 +49,12 @@ push_ecr_image(){
 }
 
 register_definition() {
-
-    if revision=$(aws ecs register-task-definition --container-definitions "$task_def" --family $family | $JQ '.taskDefinition.taskDefinitionArn'); then
-      echo "Revision: $revision"
-    else
-      echo "Failed to register task definition"
-      return 1
-    fi
-
+  if revision=$(aws ecs register-task-definition --container-definitions "$task_def" --family $family | $JQ '.taskDefinition.taskDefinitionArn'); then
+    echo "Revision: $revision"
+  else
+    echo "Failed to register task definition"
+    return 1
+  fi
 }
 
 if [ "${CIRCLE_BRANCH}" == "master" ]; then
