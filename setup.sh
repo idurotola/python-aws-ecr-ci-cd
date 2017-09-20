@@ -15,12 +15,14 @@ deploy_cluster() {
   family="sample-webapp-task-family"
 
   make_task_def
-  register_definition
-  if [[ $(aws ecs update-service --cluster autodeploy --service sample-webapp-service --task-definition $revision | \
-        $JQ '.service.taskDefinition') != $revision ]]; then
-      echo "Error updating service."
-      return 1
-  fi
+  # register_definition
+  aws ecs register-task-definition --container-definitions "$task_def" --family $family
+  aws ecs update-service --cluster autodeploy --service sample-webapp-service
+  #if [[ $(aws ecs update-service --cluster autodeploy --service sample-webapp-service --task-definition $revision | \
+  #      $JQ '.service.taskDefinition') != $revision ]]; then
+  #    echo "Error updating service."
+  #    return 1
+  # fi
 }
 
 make_task_def(){
