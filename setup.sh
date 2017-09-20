@@ -44,7 +44,7 @@ make_task_def(){
 }
 
 push_ecr_image(){
-  eval $(aws ecr get-login  --no-include-email --region us-west-2)
+  eval $(aws ecr get-login --region us-west-2)
   docker push $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/autodeploy:$CIRCLE_SHA1
 }
 
