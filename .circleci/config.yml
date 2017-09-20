@@ -49,4 +49,5 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               ls
               pwd
+              deploy.sh
             fi
