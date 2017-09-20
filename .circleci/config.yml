@@ -47,7 +47,6 @@ jobs:
           name: Push application Docker image
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              login="$(aws ecr get-login)"
-              ${login}
-              docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/autodeploy:${CIRCLE_SHA1}
+              ls
+              pwd
             fi
