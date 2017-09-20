@@ -3,19 +3,19 @@ jobs:
   build:
     working_directory: /app
     docker:
-      - image: frolvlad/alpine-gcc
+      - image: digitalgenius/alpine-jq-git
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache py-pip
+            apk add --no-cache \
+              py-pip=9.0.0-r1
             pip install --upgrade pip 
             pip install \
               docker-compose==1.12.0 \
-              awscli==1.11.76 \
-              jq
+              awscli==1.11.76 
 
       - restore_cache:
           keys:
