@@ -13,9 +13,9 @@ jobs:
             apk add --no-cache py-pip
             pip install --upgrade pip 
             pip install \
+              docker \
               docker-compose==1.12.0 \
               awscli==1.11.76 \
-            pip install docker
 
       - restore_cache:
           keys:
