@@ -42,7 +42,7 @@ jobs:
           name: Push application Docker image
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              ../deploy/deploy.sh
+              .circleci/deploy.sh
             else
               echo "Skipping deploy, branch is not master"
             fi
