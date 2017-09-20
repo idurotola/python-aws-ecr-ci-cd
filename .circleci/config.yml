@@ -5,7 +5,6 @@ jobs:
       - image: fstab/aws-cli
     steps:
       - checkout
-      - run: echo "About to start deploy on ${CIRCLE_BRANCH}"
       - run: ./.circleci/setup.sh
       - deploy:
           name: Deploy Master Branch to AWS
