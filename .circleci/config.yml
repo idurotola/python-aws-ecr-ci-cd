@@ -28,12 +28,12 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-            docker build --cache-from=app -t "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/autodeploy:${CIRCLE_SHA1} ."
+            docker build --cache-from=app -t ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/autodeploy:${CIRCLE_SHA1} .
       - run:
           name: Save Docker image layer cache
           command: |
             mkdir -p /caches
-            docker save -o /caches/app.tar "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/autodeploy:${CIRCLE_SHA1}"
+            docker save -o /caches/app.tar ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/autodeploy:${CIRCLE_SHA1}
       - save_cache:
           key: v1-{{ .Branch }}-{{ epoch }}
           paths:
@@ -49,5 +49,5 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               login="$(aws ecr get-login)"
               ${login}
-              docker push "${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/autodeploy:${CIRCLE_SHA1}"
+              docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/autodeploy:${CIRCLE_SHA1}
             fi
