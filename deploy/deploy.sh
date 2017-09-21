@@ -1,5 +1,6 @@
 #!/bin/bash
 CLUSTER='autodeploy'
+APP_IMAGE = $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/autodeploy:$CIRCLE_SHA1
 
 # more bash-friendly output for jq
 JQ="jq --raw-output --exit-status"
@@ -15,14 +16,14 @@ deploy_cluster() {
   family="sample-webapp-task-family"
 
   make_task_def
-  # register_definition
+  #register_definition
   aws ecs register-task-definition --container-definitions "$task_def" --family $family
   aws ecs update-service --cluster autodeploy --service sample-webapp-service
   #if [[ $(aws ecs update-service --cluster autodeploy --service sample-webapp-service --task-definition $revision | \
-  #      $JQ '.service.taskDefinition') != $revision ]]; then
-  #    echo "Error updating service."
-  #    return 1
-  # fi
+  #     $JQ '.service.taskDefinition') != $revision ]]; then
+  #   echo "Error updating service."
+  #   return 1
+ # fi
 }
 
 make_task_def(){
@@ -35,7 +36,7 @@ make_task_def(){
       "cpu": 10,
       "portMappings": [
         {
-          "containerPort": 5555,
+          "containerPort": 8080,
           "hostPort": 80
         }
       ]
@@ -46,8 +47,12 @@ make_task_def(){
 }
 
 push_ecr_image(){
-  eval $(aws ecr get-login --region us-west-2)
-  docker push $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/autodeploy:$CIRCLE_SHA1
+  echo "Preparing to push, building now..."
+
+  # docker build -t APP_IMAGE .
+  eval $(aws ecr get-login --no-include-email --region us-west-2)
+  docker push APP_IMAGE
+  docker run -d --restart=always -p 8080:80 -t APP_IMAGE
 }
 
 register_definition() {
@@ -59,10 +64,7 @@ register_definition() {
   fi
 }
 
-if [ "${CIRCLE_BRANCH}" == "master" ]; then
-  configure_aws_cli
-  push_ecr_image
-  deploy_cluster
-else
-  echo "Not on master branch - Not Deploying"
-fi
+configure_aws_cli
+push_ecr_image
+deploy_cluster
+
