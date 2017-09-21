@@ -44,5 +44,5 @@ jobs:
           name: Push application Docker image
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              sh deploy.sh
+              sh deploy/deploy.sh
             fi
