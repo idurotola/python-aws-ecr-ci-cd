@@ -1,6 +1,6 @@
 #!/bin/bash
 CLUSTER='autodeploy'
-APP_IMAGE = "$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/autodeploy:$CIRCLE_SHA1"
+APP_IMAGE="$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/autodeploy:$CIRCLE_SHA1"
 
 # more bash-friendly output for jq
 JQ="jq --raw-output --exit-status"
