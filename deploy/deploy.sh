@@ -1,6 +1,6 @@
 #!/bin/bash
 CLUSTER='autodeploy'
-APP_IMAGE = $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/autodeploy:$CIRCLE_SHA1
+APP_IMAGE = "$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/autodeploy:$CIRCLE_SHA1"
 
 # more bash-friendly output for jq
 JQ="jq --raw-output --exit-status"
@@ -51,8 +51,8 @@ push_ecr_image(){
 
   # docker build -t APP_IMAGE .
   eval $(aws ecr get-login --no-include-email --region us-west-2)
-  docker push APP_IMAGE
-  docker run -d --restart=always -p 8080:80 -t APP_IMAGE
+  docker push $APP_IMAGE
+  docker run -d --restart=always -p 8080:80 -t $APP_IMAGE
 }
 
 register_definition() {
