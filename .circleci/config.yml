@@ -11,6 +11,8 @@ jobs:
           name: Install dependencies
           command: |
             sh deploy/setup.sh
+            curl -L -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5rc1/jq-linux-x86_64-static 
+            chmod +x ~/bin/jq
               
       - restore_cache:
           keys:
