@@ -8,5 +8,5 @@ apk add --no-cache py-pip=9.0.0-r1
 apk add --update  --no-cache curl curl-dev
 pip install docker-compose==1.12.0 
 pip install awscli==1.11.76
-
+pwd
 curl -L -o /usr/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5rc1/jq-linux-x86_64-static
